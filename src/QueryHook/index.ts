@@ -21,10 +21,7 @@ export function useOrbit (queries: Queries, options: UseQueryOptions = { fetch: 
   const initialState = useGetInititialState(manager, queries, options)
   const [state, listener] = useState<[RecordData, Status]>(initialState)
 
-  useEffect(() => {
-    const unsubscribe = manager.subscribe(queries, listener)
-    return unsubscribe
-  }, [])
+  useEffect(() => manager.subscribe(queries, listener), [])
 
   return state
 }
