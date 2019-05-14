@@ -6,7 +6,7 @@ export interface UseQueryOptions {
   fetch?: boolean
 }
 
-function useGetInititialState (manager: QueryManager, queries: Queries, options: UseQueryOptions = {}) {
+function useGetInititialState (manager: QueryManager, queries: Queries, options: UseQueryOptions) {
   return useMemo(() => {
     if (options.fetch) {
       return manager.query(queries)
@@ -16,12 +16,15 @@ function useGetInititialState (manager: QueryManager, queries: Queries, options:
   }, [queries])
 }
 
-export function useOrbit (queries: Queries, options?: UseQueryOptions) {
+export function useOrbit (queries: Queries, options: UseQueryOptions = { fetch: false }) {
   const manager = useContext(QueryContext)
   const initialState = useGetInititialState(manager, queries, options)
   const [state, listener] = useState<[RecordData, Status]>(initialState)
 
-  useEffect(() => manager.subscribe(queries, listener), [])
+  useEffect(() => {
+    const unsubscribe = manager.subscribe(queries, listener)
+    return unsubscribe
+  }, [])
 
   return state
 }

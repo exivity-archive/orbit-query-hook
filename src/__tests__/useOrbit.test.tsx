@@ -89,3 +89,17 @@ test('Component updates when cache gets changed', async (done) => {
     done()
   })
 })
+
+test('Unmounting unsubscribes', () => {
+  const account = { type: 'account', id: '1' }
+
+  const query = { Account: (q: QueryBuilder) => q.findRecord(account) }
+
+  const { unmount } = renderHook(() => useOrbit(query), { wrapper: Wrapper })
+
+  expect(Object.keys(manager._subscriptions).length).toBe(1)
+
+  unmount()
+
+  expect(Object.keys(manager._subscriptions).length).toBe(0)
+})
