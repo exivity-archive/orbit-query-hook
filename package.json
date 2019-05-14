@@ -1,0 +1,33 @@
+{
+  "name": "orbit-query-hook",
+  "version": "0.0.0",
+  "description": "Hook for querying an orbit store from a react component.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Stefan Wullems <stefan@exivity.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "semantic-release": "semantic-release"
+  },
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/release-notes-generator": "^7.1.4",
+    "jest": "^24.7.1",
+    "semantic-release": "^15.13.3",
+    "typescript": "^3.4.3"
+  },
+  "dependencies": {
+    "@orbit/data": "^0.15.23",
+    "@orbit/store": "^0.15.25",
+    "@types/jest": "^24.0.11",
+    "ts-jest": "^24.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:exivity/orbit-query-hook.git"
+  }
+}
